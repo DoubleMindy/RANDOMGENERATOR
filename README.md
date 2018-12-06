@@ -7,11 +7,11 @@ Course paper for "Pseudo-Random Generators Theory" subject
 
 * Keyboard jiffies
 
+* Parallel pool for every event class (array for mouse, for keyboard...)
+
 * Correct arithmetic (jiffies mod 2^8 >> last 8 bits)
 
 # What do we need?
-
-* Parallel pool for every event class (array for mouse, for keyboard...)
 
 * Some events from /dev/random (disk and interrupts) -- read the article of mr. Klyuev!
 
