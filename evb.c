@@ -8,8 +8,7 @@
 #define GENERATOR_LENGTH 8
 #define MSG_MAX 1024
 
-MODULE_AUTHOR("Vojtech Pavlik <vojtech@ucw.cz>");
-MODULE_DESCRIPTION("Input driver event debug module");
+MODULE_AUTHOR("TEAM 7");
 MODULE_LICENSE("GPL");
 
 static int j_temp = 0;
@@ -42,18 +41,18 @@ if(!strcmp(dev_name(&handle->dev->dev), "input1") && type == 1 && value == 1){
 
 j_temp = jiffies % pow(2, GENERATOR_LENGTH) & mask;
 printk(KERN_DEBUG "KEYBOARD %lu\n", j_temp);
-//sprintf(tmp_buf, "KEYBOARD %s\n", j_temp);
-//strcat(keyboard_pool, j_temp);
-//strcpy(j_temp, "");
+sprintf(tmp_buf, "%lu\n", j_temp);
+strcat(keyboard_pool, tmp_buf);
+strcpy(tmp_buf, "");
 }
 
 else if(!strcmp(dev_name(&handle->dev->dev), "input4") && type != 0 && code == 1 && value != 0 && (value % pow(2, GENERATOR_LENGTH) & mask - j_temp > 4)){
 
 j_temp = value % pow(2, GENERATOR_LENGTH) & mask;
 printk(KERN_DEBUG "MOUSE %lu\n", j_temp);
-//sprintf(tmp_buf, "MOUSe %s\n", j_temp);
-//strcat(mouse_pool, j_temp);
-//strcpy(j_temp, "");
+sprintf(tmp_buf, "%lu\n", j_temp);
+strcat(mouse_pool, tmp_buf);
+strcpy(tmp_buf, "");
 }
 /*
 else
@@ -130,11 +129,11 @@ static int __init evbug_init(void)
 
 static void __exit evbug_exit(void)
 {
-/*
+
 printk(KERN_DEBUG "----KEYBOARD POOL----\n %s \n", keyboard_pool);
 
 printk(KERN_DEBUG "----MOUSE POOL----\n %s \n", mouse_pool);
-*/
+
 	input_unregister_handler(&evbug_handler);
 }
 
