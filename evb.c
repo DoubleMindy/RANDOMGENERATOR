@@ -8,12 +8,11 @@
 #define GENERATOR_LENGTH 8
 #define MSG_MAX 1024
 
-MODULE_AUTHOR("TEAM 7");
-MODULE_LICENSE("GPL");
-
 static int j_temp = 0;
 static char keyboard_pool[MSG_MAX];
 static char mouse_pool[MSG_MAX];
+static char mousemov_pool[MSG_MAX];
+static char mousescr_pool[MSG_MAX];
 static char tmp_buf[MSG_MAX];
 
 unsigned mask =  (1 >> GENERATOR_LENGTH) - 1;
@@ -38,7 +37,7 @@ static void evbug_event(struct input_handle *handle, unsigned int type, unsigned
 {
 
 if(!strcmp(dev_name(&handle->dev->dev), "input1") && type == 1 && value == 1){
-
+// KEYBOARD POOL
 j_temp = jiffies % pow(2, GENERATOR_LENGTH) & mask;
 printk(KERN_DEBUG "KEYBOARD %lu\n", j_temp);
 sprintf(tmp_buf, "%lu\n", j_temp);
@@ -47,17 +46,35 @@ strcpy(tmp_buf, "");
 }
 
 else if(!strcmp(dev_name(&handle->dev->dev), "input4") && type != 0 && code == 1 && value != 0 && (value % pow(2, GENERATOR_LENGTH) & mask - j_temp > 4)){
-
+// MOUSE MOVEMENTS POOL
 j_temp = value % pow(2, GENERATOR_LENGTH) & mask;
-printk(KERN_DEBUG "MOUSE %lu\n", j_temp);
+printk(KERN_DEBUG "MOUSE MOV %lu\n", j_temp);
 sprintf(tmp_buf, "%lu\n", j_temp);
 strcat(mouse_pool, tmp_buf);
 strcpy(tmp_buf, "");
 }
-/*
-else
 
+else if(!strcmp(dev_name(&handle->dev->dev), "input4") && (code == 272 || code == 273 || code == 274) && value == 1){
+// MOUSE PRESSES POOL
+j_temp = jiffies % pow(2, GENERATOR_LENGTH) & mask;
+printk(KERN_DEBUG "MOUSE PRESS %lu\n", j_temp);
+sprintf(tmp_buf, "%lu\n", j_temp);
+strcat(mousemov_pool, tmp_buf);
+strcpy(tmp_buf, "");
+}
+
+else if(!strcmp(dev_name(&handle->dev->dev), "input3") && value == 1){
+// MOUSE SCROLLS POOL
+j_temp = jiffies % pow(2, GENERATOR_LENGTH) & mask;
+printk(KERN_DEBUG "MOUSE SCROLL %lu\n", j_temp);
+sprintf(tmp_buf, "%lu\n", j_temp);
+strcat(mousescr_pool, tmp_buf);
+strcpy(tmp_buf, "");
+}
+/*
+else {
 printk(KERN_DEBUG "Event. Dev: %s, Type: %d, Code: %d, Value: %d\n", dev_name(&handle->dev->dev), type, code, value);
+}
 */
 }
 
@@ -121,21 +138,3 @@ static struct input_handler evbug_handler = {
 	.name =		"evbug",
 	.id_table =	evbug_ids,
 };
-
-static int __init evbug_init(void)
-{
-	return input_register_handler(&evbug_handler);
-}
-
-static void __exit evbug_exit(void)
-{
-
-printk(KERN_DEBUG "----KEYBOARD POOL----\n %s \n", keyboard_pool);
-
-printk(KERN_DEBUG "----MOUSE POOL----\n %s \n", mouse_pool);
-
-	input_unregister_handler(&evbug_handler);
-}
-
-module_init(evbug_init);
-module_exit(evbug_exit);
