@@ -26,6 +26,8 @@ Just type
 
 > dmesg
 
+Then you see 
+
 > [123234.3434] lkm_example module loaded with device major number N
 
 (where N is your major number)
