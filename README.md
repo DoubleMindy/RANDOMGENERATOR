@@ -22,22 +22,22 @@ Course paper for "Pseudo-Random Generators Theory" subject
 # How to use it?
 
 Just type 
->> sudo insmod ./test.ko
+> sudo insmod ./test.ko
 
->> dmesg
+> dmesg
 
->> [123234.3434] lkm_example module loaded with device major number N
+> [123234.3434] lkm_example module loaded with device major number N
 
 (where N is your major number)
  
->> sudo mknod /dev/lkm_example c N 0
+> sudo mknod /dev/lkm_example c N 0
  
->> cat /dev/lkm_example
+> cat /dev/lkm_example
 
 (here is your pool)
 
 # Don't forget to remove it!
->> sudo rmmod test
+> sudo rmmod test
 
->> sudo rm /dev/lkm_example
+> sudo rm /dev/lkm_example
 
