@@ -11,6 +11,8 @@ Course paper for "Pseudo-Random Generators Theory" subject
 
 * Correct arithmetic (jiffies mod 2^8 >> last 8 bits)
 
+* Char device (/dev/lkm_example) is attached and available for reading of pool;
+
 # What do we need?
 
 * Some events from /dev/random (disk and interrupts) -- read the article of mr. Klyuev!
