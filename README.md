@@ -3,13 +3,17 @@ Course paper for "Pseudo-Random Generators Theory" subject
 
 # What do we have?
 
-* Mouse code values
+* Mouse movements code values
 
-* Keyboard jiffies
+* Mouse presses (left, right, ctrl) jiffies;
 
-* Parallel pool for every event class (array for mouse, for keyboard...)
+* Mouse scrolls;
 
-* Correct arithmetic (jiffies mod 2^8 >> last 8 bits)
+* Keyboard jiffies;
+
+* Parallel pool for every event class (array for mouse, for keyboard...);
+
+* Correct arithmetic (jiffies mod 2^8 >> last 8 bits);
 
 * Char device (/dev/lkm_example) is attached and available for reading of pool;
 
