@@ -26,13 +26,13 @@ Course paper for "Pseudo-Random Generators Theory" subject
 # How to use it?
 
 Just type 
-> sudo insmod ./test.ko
+> sudo insmod ./lkm.ko
 
 > dmesg
 
 Then you see 
 
-> [123234.3434] lkm_example module loaded with device major number N
+> [123234.3434] lkm: major number is -- N
 
 (where N is your major number)
  
@@ -43,7 +43,7 @@ Then you see
 (here is your pool)
 
 # Don't forget to remove it!
-> sudo rmmod test
+> sudo rmmod lkm
 
 > sudo rm /dev/lkm_example
 
