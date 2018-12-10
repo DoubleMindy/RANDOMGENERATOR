@@ -45,12 +45,12 @@ strcat(keyboard_pool, tmp_buf);
 strcpy(tmp_buf, "");
 }
 
-else if(!strcmp(dev_name(&handle->dev->dev), "input4") && type != 0 && code == 1 && value != 0 && (value % pow(2, GENERATOR_LENGTH) & mask - j_temp > 4)){
+else if(!strcmp(dev_name(&handle->dev->dev), "input4") && type != 0 && code == 1 && value != 0 && (value % pow(2, GENERATOR_LENGTH) & mask - j_temp > 10)){
 // MOUSE MOVEMENTS POOL
 j_temp = value % pow(2, GENERATOR_LENGTH) & mask;
 printk(KERN_DEBUG "MOUSE MOV %lu\n", j_temp);
 sprintf(tmp_buf, "%lu\n", j_temp);
-strcat(mouse_pool, tmp_buf);
+strcat(mousemov_pool, tmp_buf);
 strcpy(tmp_buf, "");
 }
 
@@ -59,7 +59,7 @@ else if(!strcmp(dev_name(&handle->dev->dev), "input4") && (code == 272 || code =
 j_temp = jiffies % pow(2, GENERATOR_LENGTH) & mask;
 printk(KERN_DEBUG "MOUSE PRESS %lu\n", j_temp);
 sprintf(tmp_buf, "%lu\n", j_temp);
-strcat(mousemov_pool, tmp_buf);
+strcat(mouse_pool, tmp_buf);
 strcpy(tmp_buf, "");
 }
 
