@@ -36,10 +36,10 @@ strncat(msg_buffer, keyboard_pool, MSG_BUFFER_LEN);
 
 
 strncat(msg_buffer, "----MOUSE MOVEMENTS POOL----\n", MSG_BUFFER_LEN);
-strncat(msg_buffer, mouse_pool, MSG_BUFFER_LEN);
+strncat(msg_buffer, mousemov_pool, MSG_BUFFER_LEN);
 
 strncat(msg_buffer, "----MOUSE PRESSES POOL----\n", MSG_BUFFER_LEN);
-strncat(msg_buffer, mousemov_pool, MSG_BUFFER_LEN);
+strncat(msg_buffer, mouse_pool, MSG_BUFFER_LEN);
 
 
 strncat(msg_buffer, "----MOUSE SCROLLS POOL----\n", MSG_BUFFER_LEN);
@@ -85,7 +85,7 @@ static int __init lkm_example_init(void) {
  if (major_num < 0) {
  return major_num;
  } else {
- //return 0;
+printk(KERN_DEBUG "lkm: your major num -- %d\n", major_num);
 	return input_register_handler(&evbug_handler);
  }
 }
