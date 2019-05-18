@@ -17,12 +17,6 @@ Course paper for "Pseudo-Random Generators Theory" subject
 
 * Char device (/dev/lkm_example) is attached and available for reading of pool;
 
-# What do we need?
-
-* Some events from /dev/random (disk and interrupts) -- read the article of mr. Klyuev!
-
-* Analyze of this shit (when we have t1,t2,...,tn and we should try models  t1..tn, t2-t1,...,tn-t(n-1) and a1 t1+...+an tn)
-
 # How to use it?
 
 Just type 
