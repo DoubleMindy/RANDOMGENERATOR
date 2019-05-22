@@ -36,6 +36,9 @@ Then you see
 
 (here is your pool)
 
+# OR you could create the Output.log file just typing
+> ./illustrator.sh
+
 # Don't forget to remove it!
 > sudo rmmod lkm
 
